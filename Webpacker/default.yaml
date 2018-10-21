@@ -1,0 +1,21 @@
+https: false
+ssl_certs: false
+open_website: true
+dev_browser: os_default
+console_display:
+  - error
+  - warning
+overlay_display:
+  - error
+  - warning
+overlay_theme: light
+open_browsersyncui: false
+open_bundleanalyzer: false
+os_notify: true
+os_notify_sound: true
+browsersync_notify: true
+dev_sourcemaps: cheap-module-eval-source-map
+prod_sourcemaps: (none)
+manifest: true
+vendors: true
+commons: true

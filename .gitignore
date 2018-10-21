@@ -1,0 +1,18 @@
+# OS Generated
+# ––––––––––––––––––––––
+
+.DS_Store*
+ehthumbs.db
+Thumbs.db
+*.swp
+
+# Log
+# ––––––––––––––––––––––
+
+*.log
+
+# Npm
+# ––––––––––––––––––––––
+
+node_modules/
+package-lock.json
