@@ -1,6 +1,6 @@
-# Webpacker Plugin 🚀
+# Webpacker Addon 🚀
 
-The **Webpacker** is a plugin for [Statamic CMS](https://statamic.com) that offer a simple way to include the power of webpack inside Statamic.
+**Webpacker** is an addon for [Statamic CMS](https://statamic.com) that offer a simple way to include the power of webpack inside Statamic.
 
 <p align="center">
   <img width="500" height="230" src="https://media.giphy.com/media/U6aCZCeO5dOta/giphy.gif">
