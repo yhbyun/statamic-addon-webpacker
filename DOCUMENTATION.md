@@ -56,7 +56,7 @@ Build assets and start a browsersync development serve with hot-reload
 npm run webpacker:dev
 ```
 
-![](img/terminal_mode_dev.png)
+![](https://raw.githubusercontent.com/jimblue/statamic-addon-webpacker/master/img/terminal_mode_dev.png)
 
 #### The production mode
 Build, minify and optimise assets for a production server
@@ -65,7 +65,7 @@ Build, minify and optimise assets for a production server
 npm run webpacker:prod
 ```
 
-![](img/terminal_mode_prod.png)
+![](https://raw.githubusercontent.com/jimblue/statamic-addon-webpacker/master/img/terminal_mode_prod.png)
 
 Hell yeah!!! You can now switch from developement to production and vice versas without any hassle. Just `npm run my_desires` and drink a coffee 🤘!
 
@@ -193,7 +193,7 @@ You can choose between 2 options:
 * **display errors**: _display errors in the web browser console._
 * **display warnings**: _display warnings in the web browser console._
 
-![](img/browser_console.png)
+![](https://raw.githubusercontent.com/jimblue/statamic-addon-webpacker/master/img/browser_console.png)
 
 #### Overlay
 
@@ -204,7 +204,7 @@ You can choose between 2 options:
 * **display errors**: _display errors in the web browser overlay._
 * **display warnings**: _display warnings in the web browser overlay._
 
-![](img/browser_overlay.png)
+![](https://raw.githubusercontent.com/jimblue/statamic-addon-webpacker/master/img/browser_overlay.png)
 
 #### Overlay theme
 
@@ -221,13 +221,13 @@ Because it's nice to dim the light when working late, you can choose between 2 t
 
 Open BrowserSync UI on the default web browser after initialization.
 
-![](img/browsersync_ui.png)
+![](https://raw.githubusercontent.com/jimblue/statamic-addon-webpacker/master/img/browsersync_ui.png)
 
 #### BundleAnalyzer
 
 Open BundleAnalyzer on the default web browser after initialization.
 
-![](img/bundleanalyzer.png)
+![](https://raw.githubusercontent.com/jimblue/statamic-addon-webpacker/master/img/bundleanalyzer.png)
 
 ### 🔔 Notifications
 
@@ -235,9 +235,9 @@ Open BundleAnalyzer on the default web browser after initialization.
 
 Toggle OS notification.
 
-![](img/notification_compilation.png)
-![](img/notification_success.png)
-![](img/notification_error.png)
+![](https://raw.githubusercontent.com/jimblue/statamic-addon-webpacker/master/img/notification_compilation.png)
+![](https://raw.githubusercontent.com/jimblue/statamic-addon-webpacker/master/img/notification_success.png)
+![](https://raw.githubusercontent.com/jimblue/statamic-addon-webpacker/master/img/notification_error.png)
 
 #### OS Notification sound
 
@@ -247,7 +247,7 @@ Toggle OS Notification sound.
 
 Toggle BrowserSync status popup.
 
-![](img/browsersync_popup.png)
+![](https://raw.githubusercontent.com/jimblue/statamic-addon-webpacker/master/img/browsersync_popup.png)
 
 ### 📁 Files
 
