@@ -41,61 +41,53 @@ trait WebpackerTrait
     // $theme root path
     $themeRootPath = root_path(URL::assemble(Config::get('system.filesystems.themes.root'), Config::get('theming.theme')));
 
-    // hot file path
-    $hot = URL::assemble($themeRootPath, 'hot');
+    // Hot file path
+    $hotPath = URL::assemble($themeRootPath, 'hot');
 
-    // If mode is development
-    if (File::exists($hot)) {
+    // Development server
+    $devServer = @fsockopen('localhost', '3001');
+
+    // Manifest path
+    $manifestPath = URL::assemble($themeRootPath, $this->getConfig('output_folder'), static::$manifest);
+
+    // If mode is development (development server is active and hot file exit)
+    if (is_resource($devServer) && File::exists($hotPath)) {
       // Asset path
       $assetPath = "/js/{$baseName}.js";
 
-      // Development server is active
-      $devServer = is_resource(@fsockopen('localhost', '3001'));
+      // Add JS
+      return $this->addJs($assetPath, false, $attr);
 
-      // Check if webpacker script is running in development mode
-      if ($devServer) {
-        return $this->addJs($assetPath, false, $attr);
+    // If mode is production (wepack-assets.json exist)
+    } elseif (file_exists($manifestPath)) {
+      // Array of assets paths from wepack-assets.json
+      $assetsList = collect(json_decode(File::get($manifestPath), true));
 
-      // Trow webpacker script is not running in development mode
-      } else {
-        throw new \RuntimeException(static::$errorTitle . 'please check if webpacker script is actually running in development mode');
-      }
+      // Asset path
+      $assetPath = $assetsList[$fileName];
 
-    // If mode is production
-    } else {
-      $manifestPath = URL::assemble($themeRootPath, $this->getConfig('output_folder'), static::$manifest);
+      // Check if the file exist
+      if (file_exists(root_path($assetPath))) {
 
-      // Check if wepack-assets.json exist
-      if (file_exists($manifestPath)) {
-        // Array of assets paths from wepack-assets.json
-        $assetsList = collect(json_decode(File::get($manifestPath), true));
+        // Check if file extension is CSS
+        if ($fileExt === 'css') {
+          // Add CSS
+          return $this->addCss($assetPath, $tag);
 
-        // Asset path
-        $assetPath = $assetsList[$fileName];
-
-        // Check if the file exist
-        if (file_exists(root_path($assetPath))) {
-
-          // Check if file extension is CSS
-          if ($fileExt === 'css') {
-            // Add CSS
-            return $this->addCss($assetPath, $tag);
-
-          // Check if file extension is JS
-          } elseif ($fileExt === 'js') {
-            // Add JS
-            return $this->addJs($assetPath, $tag, $attr);
-          }
-
-          // Trow missing file error
-        } else {
-          throw new \RuntimeException(static::$errorTitle . $fileName . ' doesn\'t exist, please run webpacker:prod script from your theme folder');
+        // Check if file extension is JS
+        } elseif ($fileExt === 'js') {
+          // Add JS
+          return $this->addJs($assetPath, $tag, $attr);
         }
 
-        // Trow missing wepack-assets.json error
+      // Trow missing file error
       } else {
-        throw new \RuntimeException(static::$errorTitle . static::$manifest . ' doesn\'t exist, please run webpacker:prod script from your theme folder');
+        throw new \RuntimeException(static::$errorTitle . $fileName . ' doesn\'t exist, please run webpacker:prod script from your theme folder');
       }
+
+    // Trow missing wepack-assets.json error
+    } else {
+      throw new \RuntimeException(static::$errorTitle . static::$manifest . ' doesn\'t exist and developement server is not active. Please run webpacker:prod or webpacker:dev script from your theme folder');
     }
   }
 
