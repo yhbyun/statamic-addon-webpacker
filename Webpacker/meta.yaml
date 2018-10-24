@@ -4,4 +4,4 @@ description: The power of Webpack inside Statamic.
 url: 'https://github.com/jimblue/statamic-addon-webpacker'
 developer: jimblue
 developer_url: 'https://github.com/jimblue'
-commercial: false
+commercial: true
