@@ -34,17 +34,17 @@
     "@babel/preset-env": "7.1.0",
     "babel-eslint": "10.0.1",
     "css-mqpacker": "7.0.0",
-    "cssnano": "v4.1.5",
+    "cssnano": "v4.1.7",
     "eslint-config-standard": "12.0.0",
     "eslint-plugin-import": "2.14.0",
     "eslint-plugin-node": "7.0.1",
     "eslint-plugin-promise": "4.0.1",
     "eslint-plugin-standard": "4.0.0",
-    "postcss-preset-env": "6.1.2",
+    "postcss-preset-env": "6.2.0",
     "statamic-addon-webpacker": "latest",
     "sort-css-media-queries": "1.4.1",
     "stylelint-config-standard": "18.2.0",
     "stylelint-order": "1.0.0",
-    "stylelint-scss": "3.3.1"
+    "stylelint-scss": "3.3.2"
   }
 }
