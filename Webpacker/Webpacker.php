@@ -4,37 +4,33 @@ namespace Statamic\Addons\Webpacker;
 
 use Statamic\API\Config;
 use Statamic\API\File;
-use Statamic\API\Str;
 use Statamic\API\URL;
-use Statamic\Extend\HasParameters;
+use Statamic\Extend\Extensible;
 
-trait WebpackerTrait
+class Webpacker
 {
-  /**
-   * Provides access to methods for retrieving parameters
-   */
-  use HasParameters;
-
-  //  The name of the manifest file.
-  static $manifest = 'webpacker.json';
-
-  //  Error title
-  static $errorTitle = 'Webpacker Addon Error: ';
+  use Extensible;
 
   /**
-   * Webpacker asset function
+   * Add js or css asset
    *
    * @param string $fileExt
    * @param string $baseName
    * @param string $tag
    * @param string $attr
    *
-   * @return string
+   * @return string the URL or tag for asset file
    *
    * @throws RuntimeException
    */
-  public function asset($fileExt, $baseName, $tag = false, $attr = null)
+  public function addAsset($fileExt, $baseName, $tag = false, $attr = null)
   {
+    // The name of the manifest file.
+    $manifest = 'webpacker.json';
+
+    // Error title
+    $errorTitle = 'Webpacker Addon Error: ';
+
     // Files infos
     $fileName = $baseName . '.' . $fileExt;
 
@@ -48,7 +44,7 @@ trait WebpackerTrait
     $devServer = @fsockopen('localhost', '3001');
 
     // Manifest path
-    $manifestPath = URL::assemble($themeRootPath, $this->getConfig('output_folder'), static::$manifest);
+    $manifestPath = URL::assemble($themeRootPath, $this->getConfig('output_folder'), $manifest);
 
     // If mode is development (development server is active and hot file exit)
     if (is_resource($devServer) && File::exists($hotPath)) {
@@ -82,24 +78,24 @@ trait WebpackerTrait
 
       // Trow missing file error
       } else {
-        throw new \RuntimeException(static::$errorTitle . $fileName . ' doesn\'t exist, please run webpacker:prod script from your theme folder');
+        throw new \RuntimeException($errorTitle . $fileName . ' doesn\'t exist, please run webpacker:prod script from your theme folder');
       }
 
     // Trow missing wepack-assets.json error
     } else {
-      throw new \RuntimeException(static::$errorTitle . static::$manifest . ' doesn\'t exist and developement server is not active. Please run webpacker:prod or webpacker:dev script from your theme folder');
+      throw new \RuntimeException($errorTitle . $manifest . ' doesn\'t exist and developement server is not active. Please run webpacker:prod or webpacker:dev script from your theme folder');
     }
   }
 
   /**
-   * Add css
+   * Add css asset
    *
    * @param string $assetPath
    * @param string $tag
    *
    * @return string
    */
-  public function addCss($assetPath, $tag)
+  private function addCss($assetPath, $tag)
   {
     if (isset($tag)) {
       if ($tag === 'inline') {
@@ -115,7 +111,7 @@ trait WebpackerTrait
   }
 
   /**
-   * Add js
+   * Add js asset
    *
    * @param string $assetPath
    * @param string $tag
@@ -123,7 +119,7 @@ trait WebpackerTrait
    *
    * @return string
    */
-  public function addJs($assetPath, $tag, $attr)
+  private function addJs($assetPath, $tag, $attr)
   {
     $attributes = $attr ?? '';
 
