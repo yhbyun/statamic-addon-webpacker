@@ -5,8 +5,6 @@ sections:
     fields:
       proxy:
         type: text
-        size: medium
-        autofocus: true
         display: Proxy
         placeholder: 'e.g. http(s)://domain_name.test'
         instructions: The php server domain where Statamic is running
@@ -105,14 +103,11 @@ sections:
     fields:
       output_folder:
         type: text
-        size: medium
-        autofocus: true
         display: Output folder
         placeholder: 'e.g. dist'
         instructions: The output folder name to render assets
       dev_sourcemaps:
         type: select
-        size: medium
         display: Development source maps
         instructions: Refer to webpack documentation to choose your settings https://webpack.js.org/configuration/devtool/
         default: cheap-module-eval-source-map
@@ -124,7 +119,6 @@ sections:
           cheap-module-eval-source-map: cheap-module-eval-source-map
       prod_sourcemaps:
         type: select
-        size: medium
         display: Production source maps
         instructions: Refer to webpack documentation to choose your settings https://webpack.js.org/configuration/devtool/
         default: (none)

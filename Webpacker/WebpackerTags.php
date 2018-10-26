@@ -3,12 +3,16 @@
 namespace Statamic\Addons\Webpacker;
 
 use Statamic\Extend\Tags;
-use Statamic\API\File;
-use \Statamic\Addons\Webpacker\WebpackerTrait;
+use Statamic\Addons\Webpacker\Webpacker;
 
 class WebpackerTags extends Tags
 {
-  use WebpackerTrait;
+  private $webpacker;
+
+  protected function init()
+  {
+    $this->webpacker = new Webpacker;
+  }
 
   /**
    * The {{ webpacker:base }} tag - outputs tags for manifest, vendors et commons JS file if enabled
@@ -21,24 +25,24 @@ class WebpackerTags extends Tags
 
     // Add menifest asset if enabled
     if ($this->getConfig('manifest')) {
-      $buffer = $this->asset('js', 'manifest', false, 'defer');
+      $buffer = $this->webpacker->addAsset('js', 'manifest', false, 'defer');
     }
 
     // Add vendors asset if enabled
     if ($this->getConfig('vendors')) {
-      $buffer .= "\n" . $this->asset('js', 'vendors', false, 'defer');
+      $buffer .= "\n" . $this->webpacker->addAsset('js', 'vendors', false, 'defer');
     }
 
     // Add commons asset if enabled
     if ($this->getConfig('commons')) {
-      $buffer .= "\n" . $this->asset('js', 'commons', false, 'defer');
+      $buffer .= "\n" . $this->webpacker->addAsset('js', 'commons', false, 'defer');
     }
 
     return $buffer;
   }
 
   /**
-   * The {{ webpacker:css }} tag - outputs the URL or tag for CSS file.
+   * The {{ webpacker:css }} tag - outputs the URL or tag for CSS file
    *
    * @return string
    */
@@ -47,11 +51,11 @@ class WebpackerTags extends Tags
     $baseName = $this->getParam('src');
     $tag = $this->getParam('tag');
 
-    return $this->asset('css', $baseName, $tag);
+    return $this->webpacker->addAsset('css', $baseName, $tag);
   }
 
   /**
-   * The {{ webpacker:js }} tag - outputs the URL or tag for JS file.
+   * The {{ webpacker:js }} tag - outputs the URL or tag for JS file
    *
    * @return string
    */
@@ -61,6 +65,6 @@ class WebpackerTags extends Tags
     $tag = $this->getParam('tag');
     $attr = $this->getParam('attr');
 
-    return $this->asset('js', $baseName, $tag, $attr);
+    return $this->webpacker->addAsset('js', $baseName, $tag, $attr);
   }
 }

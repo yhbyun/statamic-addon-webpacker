@@ -1,6 +1,6 @@
 {
   "name": "statamic-addon-webpacker",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "The power of Webpack inside Statamic",
   "author": "jimblue",
   "license": "MIT",
@@ -17,7 +17,7 @@
     "update:boilerplate": "ncu -u -a --packageFile Webpacker/boilerplate/package.json"
   },
   "devDependencies": {
-    "eslint": "5.7.0",
+    "eslint": "5.8.0",
     "eslint-config-standard": "12.0.0"
   },
   "dependencies": {
@@ -28,7 +28,7 @@
     "clean-webpack-plugin": "0.1.19",
     "css-loader": "1.0.0",
     "deepmerge": "2.2.1",
-    "eslint": "5.7.0",
+    "eslint": "5.8.0",
     "eslint-loader": "2.1.1",
     "file-loader": "2.0.0",
     "friendly-errors-webpack-plugin": "1.7.0",
@@ -48,7 +48,7 @@
     "stylelint": "9.6.0",
     "stylelint-webpack-plugin": "0.10.5",
     "terser-webpack-plugin": "1.1.0",
-    "webpack": "4.22.0",
+    "webpack": "4.23.1",
     "webpack-assets-manifest": "3.1.0",
     "webpack-build-notifier": "0.1.30",
     "webpack-bundle-analyzer": "3.0.3",
