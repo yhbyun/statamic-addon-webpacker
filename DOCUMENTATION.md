@@ -66,6 +66,8 @@ npm run webpacker:prod
 
 ![](https://raw.githubusercontent.com/jimblue/statamic-addon-webpacker/master/img/terminal_mode_prod.png)
 
+> NOTE: You can access to environment setting from your assets with the boolean const `STATAMIC_DEV` and `STATAMIC_PROD`
+
 Hell yeah!!! You can now switch from developement to production and vice versas without any hassle. Just `npm run my_desires` and drink a coffee 🤘!
 
 ## 🌈 Tags

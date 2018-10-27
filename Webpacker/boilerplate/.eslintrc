@@ -13,8 +13,8 @@
     "browser": true
   },
   "globals": {
-    "WEBPACKER_DEV": true,
-    "WEBPACKER_PROD": true
+    "STATAMIC_DEV": true,
+    "STATAMIC_PROD": true
   },
   "rules": {
     "arrow-parens": 0,

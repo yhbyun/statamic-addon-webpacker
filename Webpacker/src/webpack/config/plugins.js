@@ -98,8 +98,8 @@ module.exports = () => {
   // Provide access to environment from assets
   plugins.push(
     new webpack.DefinePlugin({
-      WEBPACKER_DEV: Settings.dev,
-      WEBPACKER_PROD: Settings.prod
+      STATAMIC_DEV: Settings.dev,
+      STATAMIC_PROD: Settings.prod
     })
   )
 
