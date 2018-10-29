@@ -1,5 +1,5 @@
 name: Webpacker
-version: 1.0.3
+version: 1.0.4
 description: 'The power of Webpack inside Statamic.'
 url: 'https://github.com/jimblue/statamic-addon-webpacker'
 developer: jimblue
