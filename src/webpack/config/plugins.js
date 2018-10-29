@@ -110,11 +110,11 @@ module.exports = () => {
         title: Settings.appName,
         sound: Settings.osNotifySound,
         suppressCompileStart: false,
-        logo: path.resolve(WebpackerPath, 'img/logo.png'),
-        successIcon: path.resolve(WebpackerPath, 'img/success.png'),
-        warningIcon: path.resolve(WebpackerPath, 'img/warning.png'),
-        failureIcon: path.resolve(WebpackerPath, 'img/failure.png'),
-        compileIcon: path.resolve(WebpackerPath, 'img/compile.png')
+        logo: path.resolve(Settings.nodeModulesAssetsPath, 'notification/logo.png'),
+        successIcon: path.resolve(Settings.nodeModulesAssetsPath, 'notification/success.png'),
+        warningIcon: path.resolve(Settings.nodeModulesAssetsPath, 'notification/warning.png'),
+        failureIcon: path.resolve(Settings.nodeModulesAssetsPath, 'notification/failure.png'),
+        compileIcon: path.resolve(Settings.nodeModulesAssetsPath, 'notification/compile.png')
       })
     )
   }

@@ -47,6 +47,9 @@ class Settings {
     const activeTheme = themeSettings.theme
     const _themePath = path.resolve(sitePath, `themes/${activeTheme}`)
 
+    // node_module Webpacker assets path
+    const _nodeModulesAssetsPath = path.resolve(__dirname, '../assets')
+
     // Theme Meta
     const themeMeta = parseYaml(path.resolve(`${_themePath}/meta.yaml`))
     const _themeName = themeMeta.name
@@ -181,6 +184,7 @@ class Settings {
       bundleAnalyzerPort: 3003,
       https: _https,
       themePath: _themePath,
+      nodeModulesAssetsPath: _nodeModulesAssetsPath,
       outputPath: _outputPath,
       publicPath: _publicPath,
       devBrowser: _devBrowser,
