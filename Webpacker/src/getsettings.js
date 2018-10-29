@@ -60,10 +60,9 @@ class Settings {
 
     // Assets entry
     const _entry = (() => {
-      const sourcePath = path.resolve(_themePath, 'src')
       const entriesName = []
       const entriesPath = []
-      const entries = prependPath(sourcePath, entryFiles)
+      const entries = prependPath(_themePath, entryFiles)
 
       for (let i = 0; i < entries.length; i++) {
         const entryPath = entries[i]
