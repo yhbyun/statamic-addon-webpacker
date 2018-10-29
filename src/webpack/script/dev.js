@@ -66,8 +66,8 @@ const OSnotifyMessage = (icon, eventName, fileName) => {
     osNotifier.notify({
       title: Settings.appName,
       message: fileName ? `${eventName}: ${fileName}` : eventName,
-      contentImage: path.resolve(WebpackerPath, 'img/logo.png'),
-      icon: path.resolve(WebpackerPath, `img/${icon}.png`),
+      contentImage: path.resolve(Settings.nodeModulesAssetsPath, 'notification/logo.png'),
+      icon: path.resolve(Settings.nodeModulesAssetsPath, `notification/${icon}.png`),
       sound: Settings.notifySound
     })
   }
