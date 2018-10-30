@@ -21,6 +21,7 @@ const buildCallback = (error, stats) => {
   // Output build info in the console
   process.stdout.write(
     `${stats.toString({
+      builtAt: false,
       colors: true,
       modules: false,
       children: false,

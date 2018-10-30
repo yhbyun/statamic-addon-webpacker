@@ -12,9 +12,9 @@ const StyleLintPlugin = require('stylelint-webpack-plugin')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 const WebpackNotifierPlugin = require('webpack-build-notifier')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-const WebpackBar = require('webpackbar')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const WebpackAssetsManifest = require('webpack-assets-manifest')
+const ProgressPlugin = require('../plugins/progressPlugin')
 
 // PLUGINS CONFIG
 // ––––––––––––––––––––––
@@ -81,13 +81,8 @@ module.exports = () => {
   // Common Plugins
   // ––––––––––––––––––––––
 
-  // Console progress bar
-  plugins.push(
-    new WebpackBar({
-      compiledIn: false,
-      name: Settings.appName
-    })
-  )
+  // Display webpack progress in the console
+  plugins.push(new ProgressPlugin())
 
   // Better error feedback in the console
   plugins.push(new FriendlyErrorsWebpackPlugin())
