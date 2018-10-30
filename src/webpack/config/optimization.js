@@ -3,7 +3,7 @@ const deepmerge = require('deepmerge')
 /* global Settings */
 
 // Plugins libraries
-const TerserPlugin = require('terser-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin')
 
 // OPTIMIZATION CONFIG
 // ––––––––––––––––––––––

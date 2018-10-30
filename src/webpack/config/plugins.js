@@ -1,4 +1,4 @@
-/* global Settings WebpackerPath */
+/* global Settings */
 
 // Webpack
 const webpack = require('webpack')
@@ -12,9 +12,9 @@ const StyleLintPlugin = require('stylelint-webpack-plugin')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 const WebpackNotifierPlugin = require('webpack-build-notifier')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-const WebpackBar = require('webpackbar')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const WebpackAssetsManifest = require('webpack-assets-manifest')
+const ProgressPlugin = require('../plugins/progressPlugin')
 
 // PLUGINS CONFIG
 // ––––––––––––––––––––––
@@ -56,7 +56,7 @@ module.exports = () => {
       new WebpackAssetsManifest({
         output: 'webpacker.json',
         publicPath: true,
-        transform (assets, manifest) {
+        transform(assets, manifest) {
           // Theme infos
           const buildInfos = {
             BUILD_INFORMATIONS: {
@@ -68,7 +68,7 @@ module.exports = () => {
 
           return Object.assign(buildInfos, assets)
         },
-        customize (entry, original, manifest, asset) {
+        customize(entry, original, manifest, asset) {
           // Prevent adding sourcemap to the manifest
           if (entry.key.toLowerCase().endsWith('.map')) {
             return false
@@ -81,13 +81,8 @@ module.exports = () => {
   // Common Plugins
   // ––––––––––––––––––––––
 
-  // Console progress bar
-  plugins.push(
-    new WebpackBar({
-      compiledIn: false,
-      name: Settings.appName
-    })
-  )
+  // Display webpack progress in the console
+  plugins.push(new ProgressPlugin())
 
   // Better error feedback in the console
   plugins.push(new FriendlyErrorsWebpackPlugin())
@@ -118,7 +113,6 @@ module.exports = () => {
       })
     )
   }
-
 
   // Create a server with Bundle Analyzer
   if (Settings.openBundleAnalyzer) {

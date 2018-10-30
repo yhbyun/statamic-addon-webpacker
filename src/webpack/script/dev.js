@@ -1,4 +1,4 @@
-/* global Settings WebpackerPath */
+/* global Settings */
 
 // Webpack
 const webpack = require('webpack')
@@ -153,7 +153,7 @@ const browserSyncServerOptions = {
 // BrowserSync server callback
 const browserSyncServerCallback = () => {
   // Open BrowserSync UI if enabled
-  if (Settings.openBrowserSyncUI) opn(`http://localhost:${Settings.browserSyncPort}`, {app: Settings.devBrowser})
+  if (Settings.openBrowserSyncUI) opn(`http://localhost:${Settings.browserSyncPort}`, { app: Settings.devBrowser })
 }
 
 // Init BrowserSync server
