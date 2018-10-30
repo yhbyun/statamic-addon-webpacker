@@ -35,7 +35,7 @@ const buildCallback = (error, stats) => {
   )
 
   // Open website on local server if enabled
-  if (Settings.openWebsite) opn(Settings.proxy, {app: Settings.devBrowser})
+  if (Settings.openWebsite) opn(Settings.proxy, { app: Settings.devBrowser })
 
   // Kill node process if BundleAnalyzer is not enabled
   if (!Settings.openBundleAnalyzer) process.exit()

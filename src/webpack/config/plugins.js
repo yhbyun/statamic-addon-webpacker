@@ -1,4 +1,4 @@
-/* global Settings WebpackerPath */
+/* global Settings */
 
 // Webpack
 const webpack = require('webpack')
@@ -56,7 +56,7 @@ module.exports = () => {
       new WebpackAssetsManifest({
         output: 'webpacker.json',
         publicPath: true,
-        transform (assets, manifest) {
+        transform(assets, manifest) {
           // Theme infos
           const buildInfos = {
             BUILD_INFORMATIONS: {
@@ -68,7 +68,7 @@ module.exports = () => {
 
           return Object.assign(buildInfos, assets)
         },
-        customize (entry, original, manifest, asset) {
+        customize(entry, original, manifest, asset) {
           // Prevent adding sourcemap to the manifest
           if (entry.key.toLowerCase().endsWith('.map')) {
             return false
@@ -118,7 +118,6 @@ module.exports = () => {
       })
     )
   }
-
 
   // Create a server with Bundle Analyzer
   if (Settings.openBundleAnalyzer) {
