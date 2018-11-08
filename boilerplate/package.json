@@ -8,13 +8,13 @@
     "webpacker:prod": "node webpack.config.js --mode=production"
   },
   "dependencies": {
-    "@babel/runtime": "7.1.2"
+    "@babel/runtime": "7.1.5"
   },
   "devDependencies": {
     "@babel/plugin-syntax-dynamic-import": "7.0.0",
     "@babel/plugin-transform-runtime": "7.1.0",
     "@babel/plugin-transform-spread": "7.0.0",
-    "@babel/preset-env": "7.1.0",
+    "@babel/preset-env": "7.1.5",
     "babel-eslint": "10.0.1",
     "css-mqpacker": "7.0.0",
     "cssnano": "v4.1.7",
@@ -23,11 +23,11 @@
     "eslint-plugin-node": "8.0.0",
     "eslint-plugin-promise": "4.0.1",
     "eslint-plugin-standard": "4.0.0",
-    "postcss-preset-env": "6.3.0",
+    "postcss-preset-env": "6.4.0",
     "statamic-addon-webpacker": "latest",
     "sort-css-media-queries": "1.4.1",
     "stylelint-config-standard": "18.2.0",
     "stylelint-order": "1.0.0",
-    "stylelint-scss": "3.3.2"
+    "stylelint-scss": "3.4.0"
   }
 }
