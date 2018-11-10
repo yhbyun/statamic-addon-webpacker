@@ -30,7 +30,7 @@ const webpacker = (entryFiles, sitePath) => {
     process.env.NODE_ENV = environmentName
 
     // Log environement to console
-    console.log(`\n${chalk.greenBright(Settings.appName.toUpperCase())} ${chalk.whiteBright.bold(`=>`)} ${chalk.yellow.bold(`${environmentName} mode`)}\n`)
+    console.log(`\n${chalk.green(Settings.appName.toUpperCase())} ${chalk.white(`=> ${environmentName} mode`)}\n`)
   }
 
   // Initiate Statamic Webpacker Plugin
