@@ -1,6 +1,6 @@
 {
   "name": "statamic-addon-webpacker",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "The power of Webpack inside Statamic",
   "author": "jimblue",
   "license": "MIT",
@@ -8,24 +8,31 @@
   "bugs": "https://github.com/jimblue/statamic-addon-webpacker/issues",
   "homepage": "https://github.com/jimblue/statamic-addon-webpacker#readme",
   "main": "src/index.js",
+  "engines": {
+    "node": ">=8.3.0"
+  },
   "scripts": {
     "setup": "npm install",
-    "clean": "rm -rf node_modules package-lock.json",
-    "reset": "npm run clean && npm run setup",
+    "reset": "npm run clear:modules && npm run setup",
+    "clear:modules": "rm -rf node_modules package-lock.json",
+    "clear:cache": "rm -rf node_modules/.cache/*",
     "update:prod": "ncu -u -a -p",
     "update:dev": "ncu -u -a -d",
     "update:boilerplate": "ncu -u -a --packageFile boilerplate/package.json"
   },
   "devDependencies": {
     "eslint": "5.9.0",
-    "eslint-config-standard": "12.0.0"
+    "eslint-config-standard": "12.0.0",
+    "eslint-plugin-import": "2.14.0",
+    "eslint-plugin-node": "8.0.0",
+    "eslint-plugin-standard": "4.0.0"
   },
   "dependencies": {
     "@babel/core": "7.1.5",
     "babel-loader": "8.0.4",
     "browser-sync": "2.26",
     "chalk": "2.4.1",
-    "clean-webpack-plugin": "0.1.19",
+    "clean-webpack-plugin": "1.0.0",
     "css-loader": "1.0.1",
     "deepmerge": "2.2.1",
     "eslint": "5.9.0",

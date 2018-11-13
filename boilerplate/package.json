@@ -1,9 +1,13 @@
 {
   "private": true,
+  "engines": {
+    "node": ">=8.3.0"
+  },
   "scripts": {
     "setup": "npm install",
-    "clean": "rm -rf node_modules package-lock.json",
-    "reset": "npm run clean && npm run setup",
+    "reset": "npm run clear:modules && npm run setup",
+    "clear:modules": "rm -rf node_modules package-lock.json",
+    "clear:cache": "rm -rf node_modules/.cache/*",
     "webpacker:dev": "node webpack.config.js --mode=development",
     "webpacker:prod": "node webpack.config.js --mode=production"
   },
@@ -24,8 +28,9 @@
     "eslint-plugin-promise": "4.0.1",
     "eslint-plugin-standard": "4.0.0",
     "postcss-preset-env": "6.4.0",
-    "statamic-addon-webpacker": "latest",
     "sort-css-media-queries": "1.4.1",
+    "statamic-addon-webpacker": "latest",
+    "stylelint-config-recess-order": "2.0.0",
     "stylelint-config-standard": "18.2.0",
     "stylelint-order": "1.0.0",
     "stylelint-scss": "3.4.0"

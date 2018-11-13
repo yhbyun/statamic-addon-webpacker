@@ -1,7 +1,7 @@
 {
   "root": true,
-  "extends": ["standard", "plugin:import/errors", "plugin:import/warnings"],
-  "plugins": ["import"],
+  "extends": ["standard", "plugin:import/errors", "plugin:import/warnings", "plugin:promise/recommended"],
+  "plugins": ["import", "promise"],
   "parser": "babel-eslint",
   "parserOptions": {
     "sourceType": "module",
@@ -15,14 +15,5 @@
   "globals": {
     "STATAMIC_DEV": true,
     "STATAMIC_PROD": true
-  },
-  "rules": {
-    "arrow-parens": 0,
-    "generator-star-spacing": 0,
-    "no-debugger": 0,
-    "no-new": 0
-  },
-  "settings": {
-    "polyfills": ["promises", "intersectionobserver"]
   }
 }

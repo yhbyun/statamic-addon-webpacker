@@ -1,5 +1,3 @@
-/* global Settings */
-
 // Modules libraries
 const MiniCssExtractLoader = require('mini-css-extract-plugin').loader
 

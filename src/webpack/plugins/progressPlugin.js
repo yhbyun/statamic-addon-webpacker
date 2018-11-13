@@ -4,7 +4,7 @@ const webpack = require('webpack')
 const ora = require('ora')
 const chalk = require('chalk')
 
-function spinnerPlugin () {
+function spinnerPlugin() {
   let running = false
   let lastStage = ''
   const spinner = ora({ color: 'green', text: chalk.green('start building...') }).info()

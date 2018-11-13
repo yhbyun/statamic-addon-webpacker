@@ -1,9 +1,10 @@
-/* global Settings */
+// Nodejs
+const fs = require('fs')
+const path = require('path')
+const console = require('console')
 
 // Tools libraries
 const chalk = require('chalk')
-const path = require('path')
-const fs = require('fs')
 
 // WEBPACKER
 // ––––––––––––––––––––––

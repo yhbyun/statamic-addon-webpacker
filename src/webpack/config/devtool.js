@@ -1,5 +1,3 @@
-/* global Settings */
-
 // DEVTOOL CONFIG
 // ––––––––––––––––––––––
 

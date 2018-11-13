@@ -1,10 +1,8 @@
-/* global Settings */
+// Nodejs
+const path = require('path')
 
 // Webpack
 const webpack = require('webpack')
-
-// Tools libraries
-const path = require('path')
 
 // Plugins libraries
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
@@ -15,6 +13,9 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const WebpackAssetsManifest = require('webpack-assets-manifest')
 const ProgressPlugin = require('../plugins/progressPlugin')
+
+// Tools libraries
+const chalk = require('chalk')
 
 // PLUGINS CONFIG
 // ––––––––––––––––––––––
@@ -56,7 +57,7 @@ module.exports = () => {
       new WebpackAssetsManifest({
         output: 'webpacker.json',
         publicPath: true,
-        transform(assets, manifest) {
+        transform(assets) {
           // Theme infos
           const buildInfos = {
             BUILD_INFORMATIONS: {
@@ -68,7 +69,7 @@ module.exports = () => {
 
           return Object.assign(buildInfos, assets)
         },
-        customize(entry, original, manifest, asset) {
+        customize(entry) {
           // Prevent adding sourcemap to the manifest
           if (entry.key.toLowerCase().endsWith('.map')) {
             return false
@@ -85,10 +86,18 @@ module.exports = () => {
   plugins.push(new ProgressPlugin())
 
   // Better error feedback in the console
-  plugins.push(new FriendlyErrorsWebpackPlugin())
+  plugins.push(
+    new FriendlyErrorsWebpackPlugin({
+      compilationSuccessInfo: {
+        messages: [`Your Statamic dev server is running here ${chalk.red(`http${Settings.https === false ? '' : 's'}://localhost:${Settings.serverPort}`)}`]
+      }
+    })
+  )
 
   // Provide Styletint support
-  plugins.push(new StyleLintPlugin())
+  plugins.push(
+    new StyleLintPlugin()
+  )
 
   // Provide access to environment from assets
   plugins.push(
