@@ -1,4 +1,6 @@
-/* global Settings */
+// Nodejs
+const path = require('path')
+const console = require('console')
 
 // Webpack
 const webpack = require('webpack')
@@ -11,7 +13,6 @@ const browserSyncServer = require('browser-sync').create()
 const osNotifier = require('node-notifier')
 const chalk = require('chalk')
 const opn = require('opn')
-const path = require('path')
 const queryString = require('query-string')
 
 // DEV SCRIPT

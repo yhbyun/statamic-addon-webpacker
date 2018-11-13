@@ -1,7 +1,11 @@
 {
   "root": true,
-  "extends": ["standard"],
+  "extends": ["eslint:recommended", "plugin:node/recommended"],
+  "plugins": ["node"],
   "env": {
     "node": true
+  },
+  "globals": {
+    "Settings": true
   }
 }
