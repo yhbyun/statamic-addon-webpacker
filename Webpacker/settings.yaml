@@ -104,8 +104,8 @@ sections:
       output_folder:
         type: text
         display: Output folder
-        placeholder: 'e.g. dist'
-        instructions: The output folder name to render assets
+        placeholder: 'Assets folder name (e.g. dist)'
+        instructions: 'Be carefull, if this is empty, assets will be ouput in your {{ theme }} root. Any js / css / images / fonts folders will be overwriteen!'
       dev_sourcemaps:
         type: select
         display: Development source maps
