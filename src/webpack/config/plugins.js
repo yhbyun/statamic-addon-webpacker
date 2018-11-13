@@ -14,6 +14,9 @@ const CleanWebpackPlugin = require('clean-webpack-plugin')
 const WebpackAssetsManifest = require('webpack-assets-manifest')
 const ProgressPlugin = require('../plugins/progressPlugin')
 
+// Tools libraries
+const chalk = require('chalk')
+
 // PLUGINS CONFIG
 // ––––––––––––––––––––––
 
@@ -83,13 +86,17 @@ module.exports = () => {
   plugins.push(new ProgressPlugin())
 
   // Better error feedback in the console
-  plugins.push(new FriendlyErrorsWebpackPlugin())
+  plugins.push(
+    new FriendlyErrorsWebpackPlugin({
+      compilationSuccessInfo: {
+        messages: [`Your Statamic dev server is running here ${chalk.red(`http${Settings.https === false ? '' : 's'}://localhost:${Settings.serverPort}`)}`]
+      }
+    })
+  )
 
   // Provide Styletint support
   plugins.push(
-    new StyleLintPlugin({
-      fix: true
-    })
+    new StyleLintPlugin()
   )
 
   // Provide access to environment from assets
