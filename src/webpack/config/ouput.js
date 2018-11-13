@@ -1,5 +1,3 @@
-/* global Settings */
-
 // OUTPUT CONFIG
 // ––––––––––––––––––––––
 

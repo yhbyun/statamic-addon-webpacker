@@ -1,6 +1,5 @@
+// Tools libraries
 const deepmerge = require('deepmerge')
-
-/* global Settings */
 
 // Plugins libraries
 const TerserPlugin = require('terser-webpack-plugin')

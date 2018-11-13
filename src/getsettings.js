@@ -1,7 +1,9 @@
-// Tools libraries
-const zipObject = require('lodash/zipObject')
+// Nodejs
 const fs = require('fs')
 const path = require('path')
+
+// Tools libraries
+const zipObject = require('lodash/zipObject')
 const yaml = require('js-yaml')
 const cli = require('yargs').argv
 

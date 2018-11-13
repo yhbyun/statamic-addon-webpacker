@@ -1,10 +1,8 @@
-/* global Settings */
+// Nodejs
+const path = require('path')
 
 // Webpack
 const webpack = require('webpack')
-
-// Tools libraries
-const path = require('path')
 
 // Plugins libraries
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
@@ -56,7 +54,7 @@ module.exports = () => {
       new WebpackAssetsManifest({
         output: 'webpacker.json',
         publicPath: true,
-        transform(assets, manifest) {
+        transform(assets) {
           // Theme infos
           const buildInfos = {
             BUILD_INFORMATIONS: {
@@ -68,7 +66,7 @@ module.exports = () => {
 
           return Object.assign(buildInfos, assets)
         },
-        customize(entry, original, manifest, asset) {
+        customize(entry) {
           // Prevent adding sourcemap to the manifest
           if (entry.key.toLowerCase().endsWith('.map')) {
             return false
@@ -88,7 +86,11 @@ module.exports = () => {
   plugins.push(new FriendlyErrorsWebpackPlugin())
 
   // Provide Styletint support
-  plugins.push(new StyleLintPlugin())
+  plugins.push(
+    new StyleLintPlugin({
+      fix: true
+    })
+  )
 
   // Provide access to environment from assets
   plugins.push(

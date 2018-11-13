@@ -8,6 +8,9 @@
   "bugs": "https://github.com/jimblue/statamic-addon-webpacker/issues",
   "homepage": "https://github.com/jimblue/statamic-addon-webpacker#readme",
   "main": "src/index.js",
+  "engines": {
+    "node": ">=8.3.0"
+  },
   "scripts": {
     "setup": "npm install",
     "reset": "npm run clear:modules && npm run setup",

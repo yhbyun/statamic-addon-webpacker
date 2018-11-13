@@ -4,5 +4,8 @@
   "plugins": ["node"],
   "env": {
     "node": true
+  },
+  "globals": {
+    "Settings": true
   }
 }

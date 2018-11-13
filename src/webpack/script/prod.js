@@ -1,4 +1,5 @@
-/* global Settings */
+// Nodejs
+const process = require('process')
 
 // Webpack
 const webpack = require('webpack')

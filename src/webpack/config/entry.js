@@ -1,5 +1,3 @@
-/* global Settings */
-
 // ENTRY CONFIG
 // ––––––––––––––––––––––
 
