@@ -39,8 +39,11 @@ const buildCallback = (error, stats) => {
   // Open website on local server if enabled
   if (Settings.openWebsite) opn(Settings.proxy, { app: Settings.devBrowser })
 
+  // Method to stop Webpacker process
+  const killWebpaker = process.exit;
+
   // Kill node process if BundleAnalyzer is not enabled
-  if (!Settings.openBundleAnalyzer) process.exit()
+  if (!Settings.openBundleAnalyzer) killWebpaker()
 }
 
 // Init Webpack build process
