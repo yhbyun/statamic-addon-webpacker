@@ -28,9 +28,6 @@ class Webpacker
     // The name of the manifest file.
     $manifest = 'webpacker.json';
 
-    // Error title
-    $errorTitle = 'Webpacker Addon Error: ';
-
     // Files infos
     $fileName = $baseName . '.' . $fileExt;
 
@@ -54,36 +51,39 @@ class Webpacker
       // Add JS
       return $this->addJs($assetPath, false, $attr);
 
-    // If mode is production (wepack-assets.json exist)
+    // If mode is production (wepacker.json exist)
     } elseif (file_exists($manifestPath)) {
-      // Array of assets paths from wepack-assets.json
-      $assetsList = collect(json_decode(File::get($manifestPath), true));
+      // Array of assets paths from wepacker.json
+      $assetsList = json_decode(File::get($manifestPath), true);
+
+      // Stop here if asset isn't in wepacker.json
+      if (empty($assetsList[$fileName])) {
+        throw new \RuntimeException("{$fileName} isn't in {$manifest}, please run webpacker:prod script from your theme folder again");
+      }
 
       // Asset path
       $assetPath = $assetsList[$fileName];
 
-      // Check if the file exist
-      if (file_exists(root_path($assetPath))) {
-
-        // Check if file extension is CSS
-        if ($fileExt === 'css') {
-          // Add CSS
-          return $this->addCss($assetPath, $tag);
-
-        // Check if file extension is JS
-        } elseif ($fileExt === 'js') {
-          // Add JS
-          return $this->addJs($assetPath, $tag, $attr);
-        }
-
-      // Trow missing file error
-      } else {
-        throw new \RuntimeException($errorTitle . $fileName . ' doesn\'t exist, please run webpacker:prod script from your theme folder');
+      // Stop here if asset file doesn't exist
+      if (!file_exists(root_path($assetPath))) {
+        // Trow missing file error
+        throw new \RuntimeException("{$fileName} is in {$manifest} but the file cant't be found, please run webpacker:prod script from your theme folder again");
       }
 
-    // Trow missing wepack-assets.json error
+      // Check if file extension is CSS
+      if ($fileExt === 'css') {
+        // Add CSS
+        return $this->addCss($assetPath, $tag);
+
+      // Check if file extension is JS
+      } elseif ($fileExt === 'js') {
+        // Add JS
+        return $this->addJs($assetPath, $tag, $attr);
+      }
+
+    // Trow missing wepacker.json error
     } else {
-      throw new \RuntimeException($errorTitle . $manifest . ' doesn\'t exist and developement server is not active. Please run webpacker:prod or webpacker:dev script from your theme folder');
+      throw new \RuntimeException("{$manifest} doesn't exist and developement server is not active. Please run webpacker:prod or webpacker:dev script from your theme folder");
     }
   }
 
