@@ -40,7 +40,10 @@ module.exports = () => {
         test: /\.(scss|sass|css)$/,
         use: [
           {
-            loader: Settings.prod ? MiniCssExtractLoader : 'style-loader'
+            loader: Settings.prod ? MiniCssExtractLoader : 'style-loader',
+            options: {
+              sourceMap: true
+            }
           },
           {
             loader: 'css-loader',
