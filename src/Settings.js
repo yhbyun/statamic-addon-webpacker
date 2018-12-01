@@ -32,12 +32,22 @@ const prependPath = (destination, pathsArray) => {
 
 class Settings {
   // Settings constructor
-  constructor(entryFiles, sitePath) {
+  constructor(entryFiles) {
+    // Determine the theme root
+    if (cli['$0'].includes('ava')) {
+      this.themePath =  path.resolve(__dirname, '../');
+    } else {
+      this.themePath =  process.cwd();
+    }
+
+    // Statamic define site path
+    const sitePath = path.resolve(this.themePath, '../..')
+
     // Webpacker addon settings
-    const addonSettings = parseYaml(path.resolve(`${sitePath}/settings/addons/webpacker.yaml`))
+    const addonSettings = parseYaml(path.resolve(sitePath, 'settings/addons/webpacker.yaml'))
 
     // Theme settings
-    const themeSettings = parseYaml(path.resolve(`${sitePath}/settings/theming.yaml`))
+    const themeSettings = parseYaml(path.resolve(sitePath, 'settings/theming.yaml'))
 
     // Localhost certificates
     const sslCerts = {
@@ -47,27 +57,26 @@ class Settings {
 
     // Active theme
     const activeTheme = themeSettings.theme
-    const _themePath = path.resolve(sitePath, `themes/${activeTheme}`)
 
     // node_module Webpacker assets path
     const _nodeModulesAssetsPath = path.resolve(__dirname, '../assets')
 
     // Theme Meta
-    const themeMeta = parseYaml(path.resolve(`${_themePath}/meta.yaml`))
+    const themeMeta = parseYaml(path.resolve(this.themePath, 'meta.yaml'))
     const _themeName = themeMeta.name
     const _themeVersion = themeMeta.version
     const _themeDescription = themeMeta.description
 
     // Path
     const outputFolder = addonSettings.output_folder ? `${addonSettings.output_folder}/` : ''
-    const _outputPath = path.resolve(_themePath, outputFolder)
+    const _outputPath = path.resolve(this.themePath, outputFolder)
     const _publicPath = `/site/themes/${activeTheme}/${outputFolder}`
 
     // Assets entry
     const _entry = (() => {
       const entriesName = []
       const entriesPath = []
-      const entries = prependPath(_themePath, entryFiles)
+      const entries = prependPath(this.themePath, entryFiles)
 
       for (let i = 0; i < entries.length; i++) {
         const entryPath = entries[i]
@@ -185,7 +194,7 @@ class Settings {
       browserSyncPort: 3002,
       bundleAnalyzerPort: 3003,
       https: _https,
-      themePath: _themePath,
+      themePath: this.themePath,
       nodeModulesAssetsPath: _nodeModulesAssetsPath,
       outputPath: _outputPath,
       publicPath: _publicPath,
