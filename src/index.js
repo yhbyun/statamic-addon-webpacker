@@ -9,8 +9,6 @@ const chalk = require('chalk')
 // WEBPACKER
 // ––––––––––––––––––––––
 
-const GetSettings = require('./getsettings')
-
 /**
  * @name Webpacker
  * @description A Statamic plugin to help theme development with webpack
@@ -18,12 +16,9 @@ const GetSettings = require('./getsettings')
  * @param {array} Entry files to process with webpack
  * @param {string} Path to Statamic site folder
  */
-const webpacker = (entryFiles, sitePath) => {
+const webpacker = (entryFiles) => {
   // Make Settings global
-  global.Settings = new GetSettings(entryFiles, sitePath)
-
-  // Make Webpacker path global
-  global.WebpackerPath = path.resolve(__dirname)
+  global.Settings = new (require('./Settings'))(entryFiles)
 
   // Function to define and log environement
   const environement = environmentName => {
