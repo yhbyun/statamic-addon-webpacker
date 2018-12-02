@@ -5,7 +5,6 @@ const path = require('path')
 // Tools libraries
 const zipObject = require('lodash/zipObject')
 const yaml = require('js-yaml')
-const cli = require('yargs').argv
 
 // HELPERS
 // ––––––––––––––––––––––
@@ -33,15 +32,11 @@ const prependPath = (destination, pathsArray) => {
 class Settings {
   // Settings constructor
   constructor(entryFiles) {
-    // Determine the theme root
-    if (cli['$0'].includes('ava')) {
-      this.themePath =  path.resolve(__dirname, '../');
-    } else {
-      this.themePath =  process.cwd();
-    }
+    // Find the theme path
+    const themePath =  process.cwd();
 
     // Statamic define site path
-    const sitePath = path.resolve(this.themePath, '../..')
+    const sitePath = path.resolve(themePath, '../..')
 
     // Webpacker addon settings
     const addonSettings = parseYaml(path.resolve(sitePath, 'settings/addons/webpacker.yaml'))
@@ -62,21 +57,21 @@ class Settings {
     const _nodeModulesAssetsPath = path.resolve(__dirname, '../assets')
 
     // Theme Meta
-    const themeMeta = parseYaml(path.resolve(this.themePath, 'meta.yaml'))
+    const themeMeta = parseYaml(path.resolve(themePath, 'meta.yaml'))
     const _themeName = themeMeta.name
     const _themeVersion = themeMeta.version
     const _themeDescription = themeMeta.description
 
     // Path
     const outputFolder = addonSettings.output_folder ? `${addonSettings.output_folder}/` : ''
-    const _outputPath = path.resolve(this.themePath, outputFolder)
+    const _outputPath = path.resolve(themePath, outputFolder)
     const _publicPath = `/site/themes/${activeTheme}/${outputFolder}`
 
     // Assets entry
     const _entry = (() => {
       const entriesName = []
       const entriesPath = []
-      const entries = prependPath(this.themePath, entryFiles)
+      const entries = prependPath(themePath, entryFiles)
 
       for (let i = 0; i < entries.length; i++) {
         const entryPath = entries[i]
@@ -90,7 +85,7 @@ class Settings {
     })()
 
     // Mode
-    const webpackerMode = cli.mode
+    const webpackerMode = process.env.NODE_ENV
     const _dev = webpackerMode === 'development'
     const _prod = webpackerMode === 'production'
 
@@ -194,7 +189,7 @@ class Settings {
       browserSyncPort: 3002,
       bundleAnalyzerPort: 3003,
       https: _https,
-      themePath: this.themePath,
+      themePath: themePath,
       nodeModulesAssetsPath: _nodeModulesAssetsPath,
       outputPath: _outputPath,
       publicPath: _publicPath,

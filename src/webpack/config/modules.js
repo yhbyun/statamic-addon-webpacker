@@ -40,13 +40,16 @@ module.exports = () => {
         test: /\.(scss|sass|css)$/,
         use: [
           {
-            loader: Settings.prod ? MiniCssExtractLoader : 'style-loader'
+            loader: Settings.prod ? MiniCssExtractLoader : 'style-loader',
+            options: {
+              sourceMap: true
+            }
           },
           {
             loader: 'css-loader',
             options: {
               sourceMap: true,
-              importLoaders: 2
+              importLoaders: 3
             }
           },
           {
@@ -61,8 +64,7 @@ module.exports = () => {
           {
             loader: 'sass-loader',
             options: {
-              sourceMap: true,
-              attempts: 1
+              sourceMap: true
             }
           }
         ]
