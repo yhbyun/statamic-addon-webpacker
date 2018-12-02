@@ -14,7 +14,6 @@ const chalk = require('chalk')
  * @description A Statamic plugin to help theme development with webpack
  *
  * @param {array} Entry files to process with webpack
- * @param {string} Path to Statamic site folder
  */
 const webpacker = (entryFiles) => {
   // Make Settings global
