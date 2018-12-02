@@ -8,13 +8,6 @@ module.exports = {
     mqpacker({
       sort: sortCSSmq
     }),
-    postcssPresetEnv({
-      features: {
-        customProperties: {
-          warnings: false
-        }
-      }
-    }),
     cssnano({
       preset: [
         'default',
@@ -24,6 +17,13 @@ module.exports = {
           }
         }
       ]
+    }),
+    postcssPresetEnv({
+      features: {
+        customProperties: {
+          warnings: false
+        }
+      }
     })
   ]
 }

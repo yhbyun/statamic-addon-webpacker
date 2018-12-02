@@ -8,8 +8,8 @@
     "reset": "npm run clear:modules && npm run setup",
     "clear:modules": "rm -rf node_modules package-lock.json",
     "clear:cache": "rm -rf node_modules/.cache/*",
-    "webpacker:dev": "node webpack.config.js --mode=development",
-    "webpacker:prod": "node webpack.config.js --mode=production"
+    "webpacker:dev": "cross-env NODE_ENV=development node webpack.config.js",
+    "webpacker:prod": "cross-env NODE_ENV=production node webpack.config.js"
   },
   "dependencies": {
     "@babel/runtime": "7.1.5"
