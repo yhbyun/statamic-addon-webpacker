@@ -2,13 +2,15 @@ const mqpacker = require('css-mqpacker')
 const sortCSSmq = require('sort-css-media-queries')
 const postcssPresetEnv = require('postcss-preset-env')
 const cssnano = require('cssnano')
+const purgecss = require('@fullhuman/postcss-purgecss')
 
-module.exports = {
+
+module.exports = ({ env }) => ({
   plugins: [
     mqpacker({
       sort: sortCSSmq
     }),
-    cssnano({
+    env === 'production' ? cssnano({
       preset: [
         'default',
         {
@@ -17,7 +19,15 @@ module.exports = {
           }
         }
       ]
-    }),
+    }) : false,
+    env === 'production' ? purgecss({
+      content: [
+        'layouts/*.html',
+        'templates/**/*.html',
+        'partials/**/*.html',
+        'src/js/**/*.js',
+      ]
+    }) : false,
     postcssPresetEnv({
       features: {
         customProperties: {
@@ -26,4 +36,4 @@ module.exports = {
       }
     })
   ]
-}
+})
