@@ -4,7 +4,6 @@ const postcssPresetEnv = require('postcss-preset-env')
 const cssnano = require('cssnano')
 const purgecss = require('@fullhuman/postcss-purgecss')
 
-
 module.exports = ({ env }) => ({
   plugins: [
     mqpacker({
@@ -22,11 +21,11 @@ module.exports = ({ env }) => ({
     }) : false,
     env === 'production' ? purgecss({
       content: [
-        'layouts/*.html',
-        'templates/**/*.html',
-        'partials/**/*.html',
-        'src/js/**/*.js',
-      ]
+        './layouts/*.html',
+        './templates/**/*.html',
+        './partials/**/*.html'
+      ],
+      keyframes: true
     }) : false,
     postcssPresetEnv({
       features: {
