@@ -67,6 +67,9 @@ class Settings {
     const _outputPath = path.resolve(themePath, outputFolder)
     const _publicPath = `/site/themes/${activeTheme}/${outputFolder}`
 
+    // Assets context
+    const _context = addonSettings.context_folder ? path.resolve(themePath, addonSettings.context_folder) : themePath
+
     // Assets entry
     const _entry = (() => {
       const entriesName = []
@@ -78,7 +81,7 @@ class Settings {
         const entryExtension = path.extname(entryPath)
 
         entriesName[i] = path.basename(entryPath, entryExtension)
-        entriesPath[i] = [entryPath]
+        entriesPath[i] = entryPath
       }
 
       return zipObject(entriesName, entriesPath)
@@ -157,7 +160,7 @@ class Settings {
     const _browserSyncNotify = addonSettings.browsersync_notify
 
     // Code splitting
-    const _manifest = addonSettings.manifest
+    const _runtime = addonSettings.runtime
     const _vendors = addonSettings.vendors
     const _commons = addonSettings.commons
 
@@ -180,6 +183,7 @@ class Settings {
       themeName: _themeName,
       themeVersion: _themeVersion,
       themeDescription: _themeDescription,
+      context: _context,
       entry: _entry,
       mode: webpackerMode,
       dev: _dev,
@@ -206,7 +210,7 @@ class Settings {
       browserSyncNotify: _browserSyncNotify,
       openBrowserSyncUI: _openBrowserSyncUI,
       openBundleAnalyzer: _openBundleAnalyzer,
-      manifest: _manifest,
+      runtime: _runtime,
       vendors: _vendors,
       commons: _commons,
       devSourceMaps: _devSourceMaps,

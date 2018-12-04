@@ -21,9 +21,6 @@ const webpacker = (entryFiles) => {
 
   // Function to define and log environement
   const environement = environmentName => {
-    // Define NODE_ENV
-    process.env.NODE_ENV = environmentName
-
     // Log environement to console
     console.log(`\n${chalk.green(Settings.appName.toUpperCase())} ${chalk.white(`=> ${environmentName} mode`)}\n`)
   }

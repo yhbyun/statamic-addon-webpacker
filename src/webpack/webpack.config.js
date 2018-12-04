@@ -4,6 +4,7 @@ const performanceConfig = require('./config/performance')
 const optimizationConfig = require('./config/optimization')
 const devtoolConfig = require('./config/devtool')
 const entryConfig = require('./config/entry')
+const contextConfig = require('./config/context')
 const outputConfig = require('./config/ouput')
 const resolveConfig = require('./config/resolve')
 const modulesConfig = require('./config/modules')
@@ -24,6 +25,9 @@ const WebpackConfig = {
 
   // Source maps configuration
   devtool: devtoolConfig(),
+
+  // Context configuration
+  context: contextConfig(),
 
   // Entry configuration
   entry: entryConfig(),
