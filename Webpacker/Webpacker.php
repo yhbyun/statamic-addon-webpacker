@@ -55,7 +55,7 @@ class Webpacker
       $assetPath = "/js/{$baseName}.js";
 
       // Add JS
-      return $this->addJs($assetPath, false, $attr);
+      return $this->addJs($assetPath, true, $attr);
 
     // If mode is production (wepacker.json exist)
     } elseif (file_exists($manifestPath)) {
