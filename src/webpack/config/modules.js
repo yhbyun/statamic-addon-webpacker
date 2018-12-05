@@ -54,13 +54,13 @@ module.exports = () => {
             }
           },
           {
-            loader: 'postcss-loader',
+            loader: 'resolve-url-loader',
             options: {
               sourceMap: true
             }
           },
           {
-            loader: 'resolve-url-loader',
+            loader: 'postcss-loader',
             options: {
               sourceMap: true
             }
