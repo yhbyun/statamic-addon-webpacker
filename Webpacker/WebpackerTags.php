@@ -21,21 +21,21 @@ class WebpackerTags extends Tags
    */
   public function base()
   {
-    $buffer;
+    $buffer = null;
 
-    // Add menifest asset if enabled
-    if ($this->getConfig('manifest')) {
-      $buffer = $this->webpacker->addAsset('js', 'manifest', false, 'defer');
+    // Add runtime asset if enabled
+    if ($this->getConfig('runtime')) {
+      $buffer = $this->webpacker->addAsset('js', 'runtime', 'inline');
     }
 
-    // Add vendors asset if enabled
-    if ($this->getConfig('vendors')) {
-      $buffer .= "\n" . $this->webpacker->addAsset('js', 'vendors', false, 'defer');
+    // Add vendor asset if enabled
+    if ($this->getConfig('vendor')) {
+      $buffer .= "\n" . $this->webpacker->addAsset('js', 'vendor', true, 'defer');
     }
 
-    // Add commons asset if enabled
-    if ($this->getConfig('commons')) {
-      $buffer .= "\n" . $this->webpacker->addAsset('js', 'commons', false, 'defer');
+    // Add common asset if enabled
+    if ($this->getConfig('common')) {
+      $buffer .= "\n" . $this->webpacker->addAsset('js', 'common', true, 'defer');
     }
 
     return $buffer;

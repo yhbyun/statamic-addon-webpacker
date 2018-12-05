@@ -9,15 +9,13 @@ const WebpackConfig = require(`../webpack.config`)
 // Tools libraries
 const opn = require('opn')
 const chalk = require('chalk')
+const api = require('../../helpers/api')
 
 // PROD SCRIPT
 // ––––––––––––––––––––––
 
 // Define prod compiler
 const prodCompiler = webpack(WebpackConfig, (error, stats) => {
-  // Method to kill Webpacker process
-  const killWebpaker = process.exit
-
   // Handle errors
   if (error) {
     console.error(`\n${chalk.red(error.stack || error)}\n`)
@@ -34,7 +32,7 @@ const prodCompiler = webpack(WebpackConfig, (error, stats) => {
     console.log(`\nTry a little harder... your Statamic theme ${chalk.bold(Settings.themeName.toUpperCase())} is almost ready for production!!!`)
 
     // Kill Webpacker process
-    killWebpaker()
+    api.killProcess()
   }
 
   // Output build info in the console
@@ -62,7 +60,7 @@ const prodCompiler = webpack(WebpackConfig, (error, stats) => {
   if (Settings.openWebsite) opn(Settings.proxy, { app: Settings.devBrowser })
 
   // Kill Webpacker process if BundleAnalyzer is not enabled
-  if (!Settings.openBundleAnalyzer) killWebpaker()
+  if (!Settings.openBundleAnalyzer) api.killProcess()
 })
 
 // Init Webpack build process

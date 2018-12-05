@@ -25,6 +25,12 @@ class Webpacker
    */
   public function addAsset($fileExt, $baseName, $tag = false, $attr = null)
   {
+    // Stop here if baseName is null
+    if (is_null($baseName)) {
+      // Trow missing entry name
+      throw new \RuntimeException("The {{ webpacker:{$fileExt} }} tag must have a src parameter");
+    }
+
     // The name of the manifest file.
     $manifest = 'webpacker.json';
 
@@ -49,7 +55,7 @@ class Webpacker
       $assetPath = "/js/{$baseName}.js";
 
       // Add JS
-      return $this->addJs($assetPath, false, $attr);
+      return $this->addJs($assetPath, true, $attr);
 
     // If mode is production (wepacker.json exist)
     } elseif (file_exists($manifestPath)) {
@@ -121,18 +127,16 @@ class Webpacker
    */
   private function addJs($assetPath, $tag, $attr)
   {
-    $attributes = $attr ?? '';
-
-    if (isset($tag)) {
-      if ($tag === 'inline') {
-        $jsFileContent = trim(File::get($assetPath));
-
-        return "<script>\n{$jsFileContent}\n</script>";
-      }
+    if ($tag === true) {
+      $attributes = $attr ?? '';
 
       return "<script src=\"{$assetPath}\" {$attributes}></script>";
-    }
+    } elseif ($tag === 'inline') {
+      $jsFileContent = trim(File::get($assetPath));
 
-    return $assetPath;
+      return "<script>\n{$jsFileContent}\n</script>";
+    } else {
+      return $assetPath;
+    }
   }
 }
