@@ -29,7 +29,7 @@
     "npm-check-updates": "2.15.0"
   },
   "dependencies": {
-    "@babel/core": "7.1.6",
+    "@babel/core": "7.2.0",
     "babel-loader": "8.0.4",
     "browser-sync": "2.26",
     "chalk": "2.4.1",
@@ -41,7 +41,7 @@
     "fibers": "3.1.1",
     "file-loader": "2.0.0",
     "friendly-errors-webpack-plugin": "1.7.0",
-    "image-webpack-loader": "4.5.0",
+    "image-webpack-loader": "4.6.0",
     "js-yaml": "3.12.0",
     "lodash": "4.17.11",
     "mini-css-extract-plugin": "0.4.5",
@@ -58,7 +58,7 @@
     "stylelint": "9.9.0",
     "stylelint-webpack-plugin": "0.10.5",
     "terser-webpack-plugin": "1.1.0",
-    "webpack": "4.26.1",
+    "webpack": "4.27.0",
     "webpack-assets-manifest": "3.1.1",
     "webpack-build-notifier": "0.1.30",
     "webpack-bundle-analyzer": "3.0.3",
