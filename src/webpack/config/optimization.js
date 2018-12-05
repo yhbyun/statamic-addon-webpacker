@@ -1,6 +1,3 @@
-// Tools libraries
-const deepmerge = require('deepmerge')
-
 // Plugins libraries
 const TerserPlugin = require('terser-webpack-plugin')
 
@@ -8,72 +5,61 @@ const TerserPlugin = require('terser-webpack-plugin')
 // ––––––––––––––––––––––
 
 module.exports = () => {
-  let optimization = {
-    // To keep filename consistent between different modes
-    occurrenceOrder: true
-  }
-
-  // Code splitting webpack runtime code
-  const runtimeChunk = {
-    runtimeChunk: {
-      name: 'manifest'
-    }
-  }
-
-  // Code splitting node_modules vendors
-  const vendorsChunk = {
-    splitChunks: {
-      cacheGroups: {
-        vendors: {
-          test: /[\\/]node_modules[\\/]/,
-          name: 'vendors',
-          chunks: 'all',
-          priority: 1
+  // JS minimizer configuration
+  const minimizerConfig = [
+    new TerserPlugin({
+      cache: true,
+      parallel: true,
+      sourceMap: true,
+      terserOptions: {
+        compress: {
+          drop_debugger: true,
+          drop_console: true,
+          dead_code: true
+        },
+        output: {
+          beautify: false,
+          comments: false
         }
       }
-    }
+    })
+  ]
+
+  // Code splitting webpack runtime code
+  const runtimeChunkConfig = {
+    name: 'runtime'
+  }
+
+  // Code splitting node_modules vendor
+  const vendorChunkConfig = {
+    test: /node_modules\/(.*)\.js/,
+    name: 'vendor',
+    chunks: 'all',
+    priority: 1
   }
 
   // Code splitting entries common code
-  const commonsChunk = {
+  const commonChunkConfig = {
+    test: /\.js$/,
+    name: 'common',
+    chunks: 'initial',
+    minChunks: 2,
+    priority: 0,
+    reuseExistingChunk: true
+  }
+
+  const optimization = {
+    noEmitOnErrors: true,
+    minimizer: minimizerConfig,
+    runtimeChunk: Settings.runtime ? runtimeChunkConfig : false,
     splitChunks: {
       cacheGroups: {
-        commons: {
-          name: 'commons',
-          chunks: 'initial',
-          minChunks: 2,
-          priority: 0,
-          reuseExistingChunk: true
-        }
+        default: false,
+        vendors: Settings.vendors ? vendorChunkConfig : false,
+        commons: Settings.commons ? commonChunkConfig : false
       }
     }
   }
-
-  // Minify JS options
-  const minimizer = {
-    minimizer: [
-      // JS minimizer
-      new TerserPlugin({
-        cache: true,
-        parallel: true,
-        sourceMap: true,
-        terserOptions: {
-          compress: {
-            drop_console: true
-          },
-          output: {
-            beautify: false,
-            comments: false
-          }
-        }
-      })
-    ]
-  }
-
-  if (Settings.manifest) optimization = { ...optimization, ...runtimeChunk }
-  if (Settings.vendors) optimization = deepmerge(optimization, vendorsChunk)
-  if (Settings.commons) optimization = deepmerge(optimization, commonsChunk)
-  if (Settings.prod) optimization = { ...optimization, ...minimizer }
 
   return optimization
 }

@@ -1,6 +1,7 @@
 // Nodejs
 const path = require('path')
 const console = require('console')
+const process = require('process')
 
 // Webpack
 const webpack = require('webpack')
@@ -14,6 +15,8 @@ const osNotifier = require('node-notifier')
 const chalk = require('chalk')
 const opn = require('opn')
 const queryString = require('query-string')
+const hotFile = require('../../helpers/hotFile')
+const api = require('../../helpers/api')
 
 // DEV SCRIPT
 // ––––––––––––––––––––––
@@ -44,7 +47,8 @@ const hotMiddlewareClient = `webpack-hot-middleware/client?${hotMiddlewareClient
 const webpackEntry = WebpackConfig.entry
 
 // add hotMiddleware client to each entry
-for (const name in webpackEntry) webpackEntry[name] = [hotMiddlewareClient, ...webpackEntry[name]]
+// for (const name in webpackEntry) webpackEntry[name] = hotMiddlewareClient + webpackEntry[name]
+for (const name in webpackEntry) webpackEntry[name] = [hotMiddlewareClient, webpackEntry[name]];
 
 // Browsersync server
 // ––––––––––––––––––––––
@@ -156,6 +160,14 @@ const browserSyncServerCallback = () => {
   // Open BrowserSync UI if enabled
   if (Settings.openBrowserSyncUI) opn(`http://localhost:${Settings.browserSyncPort}`, { app: Settings.devBrowser })
 }
+
+// Make sure to delete the `hot` file when user press CTRL+C
+// https://stackoverflow.com/questions/10021373/what-is-the-windows-equivalent-of-process-onsigint-in-node-js
+process.on('SIGINT', () => {
+  hotFile.delete()
+  console.log(chalk.blue('Terminating ...'))
+  api.killProcess()
+})
 
 // Init BrowserSync server
 module.exports = () => browserSyncServer.init(browserSyncServerOptions, browserSyncServerCallback)

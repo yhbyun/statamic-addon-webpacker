@@ -43,7 +43,7 @@ module.exports = () => {
 
       // Plugin to extract S|A|CSS code from JS
       new MiniCssExtractPlugin({
-        filename: 'css/[name].[contenthash].css'
+        filename: Settings.dev ? 'css/[name].css' : 'css/[name].[contenthash].css'
       }),
 
       // Cleanup dist folder before saving new build
@@ -53,7 +53,7 @@ module.exports = () => {
         verbose: false
       }),
 
-      // Ganerate webpacker.json file that contain path reference to all builded assets
+      // Generate webpacker.json file that contain path reference to all builded assets
       new WebpackAssetsManifest({
         output: 'webpacker.json',
         publicPath: true,

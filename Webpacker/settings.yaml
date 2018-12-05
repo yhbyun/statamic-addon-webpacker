@@ -101,11 +101,18 @@ sections:
   files:
     display: Files
     fields:
+      context_folder:
+        type: text
+        display: Context folder
+        placeholder: 'source folder name (e.g. src)'
+        instructions: 'The directory that contains all your assets sources. Leave this empty if you want to use the root of your theme.'
       output_folder:
         type: text
         display: Output folder
-        placeholder: 'Assets folder name (e.g. dist)'
-        instructions: 'Be carefull, if this is empty, assets will be ouput in your {{ theme }} root. Any js / css / images / fonts folders will be overwriteen!'
+        placeholder: 'output folder name (e.g. dist)'
+        instructions: 'Th
+        is where your production assets wil be output. By default ouptut are save to a dist folder in your theme root.'
+        default: dist
       dev_sourcemaps:
         type: select
         display: Development source maps
@@ -131,18 +138,18 @@ sections:
   splitting:
     display: Code Splitting
     fields:
-      manifest:
+      runtime:
         type: toggle
-        display: Manifest
-        instructions: Move webpack runtime code to a separate manifest.js file in order to support long-term caching. This will avoid hash recreation for other files when only application files are changed
+        display: Runtime
+        instructions: Move webpack runtime code to a separate runtime.js file in order to support long-term caching. This will avoid hash recreation for other files when only application files are changed
         default: true
-      vendors:
+      vendor:
         type: toggle
-        display: Vendors
-        instructions: Move node_modules vendors to a separate vendors.js file in order to support long-term caching. This will avoid hash recreation for other files when only application files are changed
+        display: Vendor
+        instructions: Move node_modules vendor to a separate vendor.js file in order to support long-term caching. This will avoid hash recreation for other files when only application files are changed
         default: true
-      commons:
+      common:
         type: toggle
-        display: Commons
-        instructions: Move modules used in multiple assets to a separate commons.js file in order to support long-term caching. This will avoid hash recreation for other files when only application files are changed
+        display: Common
+        instructions: Move modules used in multiple assets to a separate common.js file in order to support long-term caching. This will avoid hash recreation for other files when only application files are changed
         default: true
