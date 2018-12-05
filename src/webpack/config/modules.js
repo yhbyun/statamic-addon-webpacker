@@ -1,5 +1,6 @@
 // Modules libraries
 const MiniCssExtractLoader = require('mini-css-extract-plugin').loader
+const Fiber = require('fibers');
 
 // MODULES CONFIG
 // ––––––––––––––––––––––
@@ -9,9 +10,9 @@ module.exports = () => {
     rules: [
       // JAVASCRIPT linter (using ESLINT)
       {
-        test: /\.js$/,
         enforce: 'pre',
-        exclude: /(node_modules|bower_components)/,
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
         use: [
           {
             loader: 'eslint-loader',
@@ -24,8 +25,8 @@ module.exports = () => {
 
       // JAVASCRIPT loader (using BABEL)
       {
-        test: /\.js$/,
-        exclude: /(node_modules|bower_components)/,
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
         use: [
           {
             loader: 'babel-loader',
@@ -59,19 +60,24 @@ module.exports = () => {
             }
           },
           {
-            loader: 'resolve-url-loader'
+            loader: 'resolve-url-loader',
+            options: {
+              sourceMap: true
+            }
           },
           {
             loader: 'sass-loader',
             options: {
-              sourceMap: true
+              sourceMap: true,
+              implementation: require('sass'),
+              fiber: Fiber
             }
           }
         ]
       },
       // IMAGE loader
       {
-        test: /\.(png|jpg|jpeg|gif|svg)$/,
+        test: /\.(webp|png|jpg|jpeg|gif|svg|ico)$/,
         use: [
           {
             loader: 'file-loader',
