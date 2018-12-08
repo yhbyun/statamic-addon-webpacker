@@ -7,9 +7,39 @@ use Statamic\API\File;
 use Statamic\API\URL;
 use Statamic\Extend\Extensible;
 
+/**
+ * Webpacker Class
+ *
+ * @throws \RuntimeException
+ */
 class Webpacker
 {
   use Extensible;
+
+  /**
+   * Output folder setting
+   */
+  protected $outputFolder;
+
+  /**
+   * Https setting
+   * @var string
+   */
+  protected $https;
+
+  /**
+   * Instantiate Webpacker class
+   */
+  public function __construct()
+  {
+    // Settings
+    $outputFolder = $this->getConfig('output_folder');
+    $https = $this->getConfig('https');
+
+    // Save protected variables
+    $this->outputFolder = $outputFolder;
+    $this->https = $https;
+  }
 
   /**
    * Add js or css asset
@@ -47,12 +77,14 @@ class Webpacker
     $devServer = @fsockopen('localhost', '3001');
 
     // Manifest path
-    $manifestPath = URL::assemble($themeRootPath, $this->getConfig('output_folder'), $manifest);
+    $manifestPath = URL::assemble($themeRootPath, $this->outputFolder, $manifest);
 
     // If mode is development (development server is active and hot file exit)
     if (is_resource($devServer) && File::exists($hotPath)) {
+      $protocol = $this->https ? 'https': 'http';
+
       // Asset path
-      $assetPath = "/js/{$baseName}.js";
+      $assetPath = "{$protocol}://localhost:3001/js/{$baseName}.js";
 
       // Add JS
       return $this->addJs($assetPath, true, $attr);

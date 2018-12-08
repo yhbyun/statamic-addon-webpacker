@@ -14,8 +14,7 @@ module.exports = ({ env }) => ({
         './layouts/*.html',
         './templates/**/*.html',
         './partials/**/*.html'
-      ],
-      keyframes: true
+      ]
     }) : false,
     env === 'production' ? csso({
       comments: false
