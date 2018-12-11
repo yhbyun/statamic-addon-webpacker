@@ -1,6 +1,6 @@
 {
   "name": "statamic-addon-webpacker",
-  "version": "1.1.9",
+  "version": "1.2.0",
   "description": "The power of Webpack inside Statamic",
   "author": "jimblue",
   "license": "MIT",
