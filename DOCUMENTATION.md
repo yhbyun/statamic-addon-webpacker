@@ -83,7 +83,7 @@ Hell yeah!!! You can now switch from developement to production and vice versas 
 ```
 
 ```html
-<script src="/user/themes/mytheme/js/manifest.js" defer></script> <!--  if enabled in settings -->
+<script>//INLINE JS MANIFEST</script> <!--  if enabled in settings -->
 <script src="/user/themes/mytheme/js/vendors.js" defer></script> <!--  if enabled in settings -->
 <script src="/user/themes/mytheme/js/commons.js" defer></script> <!--  if enabled in settings -->
 ```
